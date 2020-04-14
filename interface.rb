@@ -31,6 +31,11 @@ dealer = create_dealer
 deck = build_deck
 user.hand = Hand.new
 dealer.hand = Hand.new
+user.hand.deal!(deck)
+dealer.hand.deal!(deck)
 p user
 p dealer
 p deck
+p user.hand.cards.size
+p dealer.hand.cards.size
+p deck.cards.size
