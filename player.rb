@@ -1,12 +1,16 @@
 class Player
+  attr_accessor :hand
+  attr_reader :balance
 
   def initialize
     @balance = 100
   end
 
-  #имеет карты на руках - hand
-  #имеет баланс - balance
-  #увеличение баланса - increace_balance
-  #уменьшение баланса - decrease balance
-  #
+  def increase_balance
+    @balance += 10
+  end
+
+  def decrease_balance
+    @balance -= 10
+  end
 end
