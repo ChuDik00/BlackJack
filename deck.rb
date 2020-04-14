@@ -24,5 +24,5 @@ end
 
 deck = Deck.new
 deck.cards.each do |card|
-  puts card.rank
+  puts card.show_card
 end
