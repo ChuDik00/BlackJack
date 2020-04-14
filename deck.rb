@@ -1,8 +1,10 @@
 require_relative 'card'
 
 class Deck
+  include Validation
   attr_reader :cards
 
+  validate :cards, :dulicate
   def initialize
     @cards = create_deck
   end
