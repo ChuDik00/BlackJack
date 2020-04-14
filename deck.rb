@@ -8,6 +8,7 @@ class Deck
   end
 
   def create_deck
+    @deck = []
     suites = ["+", "^", "<", "<>"]
     ranks_digital = [2, 3, 4, 5, 6, 7, 8, 9, 10]
     ranks_high = ['J', 'Q', 'K', 'A']
@@ -25,3 +26,4 @@ end
 
 deck = Deck.new
 p deck.deck
+p deck.deck.size
