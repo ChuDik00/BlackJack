@@ -10,14 +10,14 @@ class Deck
   def create_deck
     @cards = []
     suits = ["+", "^", "<", "<>"]
-    ranks_digital = [2, 3, 4, 5, 6, 7, 8, 9, 10]
-    ranks_high = ['J', 'Q', 'K', 'A']
+    digital_faces = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+    higher_faces = ['J', 'Q', 'K', 'A']
     suits.each do |suit|
-      ranks_digital.each do |rank_digital|
-        @cards << Card.new(suit, rank_digital)
+      digital_faces.each do |face|
+        @cards << Card.new(suit, face)
       end
-      ranks_high.each do |rank_high|
-        @cards << Card.new(suit, rank_high)
+      higher_faces.each do |face|
+        @cards << Card.new(suit, face)
       end
     end
     @cards.shuffle.reverse.shuffle
