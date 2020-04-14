@@ -1,4 +1,6 @@
 class Dealer < Player
 
-  #имеет имя 'Dealer'
+  def initialize(name = 'Dealer')
+    super()
+  end
 end

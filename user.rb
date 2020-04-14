@@ -1,4 +1,13 @@
-class User < Player
+require_relative './validation'
 
-  #имеет имя выборочное
+class User < Player
+  include Validation
+  attr_accessor :name
+
+  validate :name, :presence
+  def initialize(name)
+    @name = name
+    validate!
+    super()
+  end
 end
