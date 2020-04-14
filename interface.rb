@@ -31,8 +31,8 @@ dealer = create_dealer
 deck = build_deck
 user.hand = Hand.new
 dealer.hand = Hand.new
-user.hand.deal!(deck)
-dealer.hand.deal!(deck)
+2.times {user.hand.deal!(deck)}
+2.times {dealer.hand.deal!(deck)}
 p user
 p dealer
 p deck
