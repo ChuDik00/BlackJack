@@ -11,7 +11,7 @@ class Hand
 
   def show_cards
     @cards.each_with_index do |card, count|
-      puts "#{count+1}: #{card.face}#{card.suit}"
+      puts "#{count + 1}: #{card.face}#{card.suit}"
     end
   end
 
