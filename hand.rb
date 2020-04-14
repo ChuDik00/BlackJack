@@ -16,9 +16,21 @@ class Hand
   def count_points
     points = 0
     @cards.each do |card|
-      points += card.rank
+      points += if card.face == 'A'
+                  ace_count_points(points, card.rank)
+                else
+                  card.rank
+                end
     end
+    points
   end
 
-
+  def ace_count_points(points, card_rank)
+    ace_rank = if points + card_rank <= 21
+                 card_rank
+               else
+                 1
+               end
+    ace_rank
+  end
 end
