@@ -1,4 +1,8 @@
+require_relative 'card'
+
 class Deck
+  attr_reader :deck
+
   def initialize
     @deck = create_deck
   end
@@ -18,3 +22,6 @@ class Deck
     @deck.shuffle.reverse.shuffle
   end
 end
+
+deck = Deck.new
+p deck.deck
