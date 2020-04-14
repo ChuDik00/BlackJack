@@ -8,11 +8,8 @@ require_relative './validation'
 def create_user
   print 'Insert your name: '
   name = gets.chomp
-  username = User.new(name)
-  p username
+  User.new(name)
 rescue RuntimeError => e
   puts e.message
   retry
 end
-
-create_user
