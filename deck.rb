@@ -23,4 +23,6 @@ class Deck
 end
 
 deck = Deck.new
-p deck
+deck.cards.each do |card|
+  puts card.rank
+end
