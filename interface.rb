@@ -21,12 +21,12 @@ def create_dealer
 rescue RuntimeError => e
   puts e.message
   retry
-endcreate
+end
 
 def build_deck
   deck = Deck.new
   p deck
 end
 create_user
-create_dealercreate
+create_dealer
 build_deck
