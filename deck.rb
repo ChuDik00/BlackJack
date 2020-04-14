@@ -21,8 +21,3 @@ class Deck
     @cards.shuffle.reverse.shuffle
   end
 end
-
-deck = Deck.new
-deck.cards.each do |card|
-  puts card.show_card
-end
