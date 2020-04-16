@@ -26,6 +26,8 @@ dealer = create_dealer
 
 loop do
   #Если нет денег, игра заканчивается
+  abort 'Your balance is ZERO!' if user.balance.zero?
+  abort 'Your balance is ZERO!' if dealer.balance.zero?
   # Показываются результаты
 
   #Если есть деньги (иначе?)
