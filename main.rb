@@ -18,17 +18,18 @@ end
 
 user = create_user
 dealer = create_dealer
-
 loop do
   abort 'Your balance is ZERO!' if user.balance.zero?
-  abort 'Your balance is ZERO!' if dealer.balance.zero?
+  abort 'Dealer balance is ZERO!' if dealer.balance.zero?
   game = Game.new(user, dealer)
   status = game.status
+  puts '*' * 20
   puts 'Dead heat!' if status.zero?
   puts 'Your victory!' if status.positive?
   puts 'Dealer victory!' if status.negative?
+  puts '*' * 20
   puts "Balance of #{user.name} = #{user.balance}"
-  puts "Balance of Dealer = #{dealer.balance}"
+  puts "Balance of Dealer = #{dealer.balance}\n"
   print 'Play again? (y/n) '
   play = gets.chomp
   case play

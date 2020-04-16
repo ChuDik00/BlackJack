@@ -71,27 +71,49 @@ class Game
     end
   end
 
+  def first_step_choice(choice)
+    case choice
+    when 1
+      puts 'Skipped one deal'
+    when 2
+      @user.hand.deal!(@deck)
+    elseputs '*' * 20
+      puts 'Wrong choice.'
+    end
+  end
+
+  def first_step
+    user_hand
+    puts '1 - Skip'
+    puts '2 - Add one card'
+    choice = gets.chomp.to_i
+    first_step_choice(choice)
+    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
+  end
+
+  def last_step_choice(choice)
+    case choice
+    when 1
+      @user.hand.deal!(@deck)
+    when 2
+      puts 'Show cards'
+    else
+      puts 'Wrong choice.'
+    end
+    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
+  end
+
   def play_game
+    first_step
     loop do
       user_hand
-      break if @user.hand.cards_number.eql?(3)
+      break if @user.hand.cards_number.eql?(3) || @dealer.hand.cards_number.eql?(3)
 
-      puts '1 - Skip'
-      puts '2 - Add one card'
-      puts '3 - Show cards'
+      puts '1 - Add one card'
+      puts '2 - Show cards'
       choice = gets.chomp.to_i
-      case choice
-      when 1
-        puts 'Skipped one deal'
-      when 2
-        @user.hand.deal!(@deck)
-      when 3
-        puts 'Show cards'
-      else
-        puts 'Wrong choice.'
-      end
-      @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
-      break if choice == 3
+      last_step_choice(choice)
+      break if choice.eql?(2)
     end
   end
 end
