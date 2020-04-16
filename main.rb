@@ -14,7 +14,7 @@ end
 user = create_user
 dealer = Dealer.new
 puts "Hello, #{user.name}!"
-puts 'Lets begin new game BlackJack!'
+puts 'Lets begin BlackJack!'
 loop do
   abort 'Your balance is ZERO!' if user.balance.zero?
   abort 'Dealer balance is ZERO!' if dealer.balance.zero?
@@ -27,10 +27,11 @@ loop do
   puts '*' * 20
   puts "Balance of #{user.name} = #{user.balance}"
   puts "Balance of Dealer = #{dealer.balance}"
-  until user_out.eql?('y') || user_out.eql?('n')
+  game_over = nil
+  until game_over.eql?('y') || game_over.eql?('n')
     print "\nPlay again? (y/n) "
-    user_out = gets.chomp.downcase
+    game_over = gets.chomp.downcase
   end
 
-  abort 'Game over!' if user_out.eql?('n')
+  abort "\nGame over!" if game_over.eql?('n')
 end

@@ -9,6 +9,7 @@ require_relative './hand'
 class Game
   def initialize(user, dealer)
     @deck = Deck.new
+    puts "\nShuffle cards and start new game!"
     @user = user
     @user.hand = Hand.new
     @dealer = dealer
