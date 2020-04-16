@@ -40,6 +40,7 @@ class Game
       #Иначе Если не 21 у обоих, то играть дальше,
       #где выбор ходов пользователя или дилера
     else
+      user_hand
       play_game
     end
 
@@ -87,11 +88,27 @@ class Game
 
   def play_game
     loop do
-    # вылететь, если число карт = 3 (луп)
+      # вылететь, если число карт = 3 (луп)
       break if @user.hand.cards_number.eql?(3)
 
-    # для пользователя пропустить ход, взять карту, открыться (break loop)
-    # для дилера, если очков меньше или = 17 добавить картул
+      # для пользователя пропустить ход, взять карту, открыться (break loop)
+      puts '1 - Skip'
+      puts '2 - Add one card'
+      puts '3 - Show cards'
+      choice = gets.chomp.to_i
+      case choice
+      when 1
+        puts 'Skipped one deal'
+      when 2
+        @user.hand.deal!(@deck)
+      when 3
+        puts 'Show cards'
+      else
+        puts 'Wrong choice.'
+      end
+      # для дилера, если очков меньше или = 17 добавить картул
+      @dealer.hand.deal(@deck) if @dealer.hand.count_points <= 17
+      break if choice == 3
     end
   end
 end
