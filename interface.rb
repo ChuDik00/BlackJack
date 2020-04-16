@@ -33,6 +33,14 @@ def user_hand
   puts @user.hand.count_points
 end
 
+def dealer_hand
+  puts 'Dealer cards: '
+  @dealer.hand.show_cards
+  print 'Dealer scores: '
+  puts @dealer.hand.count_points
+end
+
+
 user = create_user
 dealer = create_dealer
 deck = build_deck
