@@ -22,7 +22,7 @@ class Hand
   def count_points
     points = 0
     @cards.each do |card|
-      points += if card.face == 'A'
+      points += if card.face.eql?('A')
                   ace_count_points(points, card.rank)
                 else
                   card.rank
