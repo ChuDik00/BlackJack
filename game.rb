@@ -5,7 +5,6 @@ require_relative './user'
 require_relative './dealer'
 require_relative './hand'
 
-
 class Game
   def initialize(user, dealer)
     @deck = build_deck
