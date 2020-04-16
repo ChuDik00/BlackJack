@@ -32,7 +32,7 @@ class Game
   end
 
 
-  def start_game
+  def status
     #Если 21 очко у игрока или дилера
     if @user.hand.count_points == 21 || @dealer.hand.count_points == 21
       #Показать карты на руках пользователя
@@ -55,6 +55,7 @@ class Game
     #возврат статуса
     status
   end
+
 
   def new_balance(status)
     #если пользователдь выиграл

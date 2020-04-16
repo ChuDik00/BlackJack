@@ -36,11 +36,13 @@ loop do
 
   # ЗАПУСКАЕТСЯ ИГРА, возвращаются результаты игры
   # (Как считать результаты? Если игры, значит в Game)
-
+  status = game.status
   # game.user_hand
   # game.dealer_hand
 
-  #Выводятся результаты игры
+  return 'Dead heat!' if status == ?
+  return 'Your victory!' if status == ?
+  return 'Dealer victory!' if status == ?
 
 
   #Выводится баланс игрока и баланс дилера
