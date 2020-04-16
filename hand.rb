@@ -9,6 +9,10 @@ class Hand
     @cards << deck.cards.shift
   end
 
+  def cards_number
+    @cards.size
+  end
+
   def show_cards
     @cards.each_with_index do |card, count|
       puts "#{count + 1}: #{card.face}#{card.suit}"
