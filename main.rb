@@ -41,18 +41,16 @@ loop do
   #
   #Выводится баланс игрока и баланс дилера
   #Выводится новый запрос на игру типа играем ещё да/нет?
-    def play_again
-      print 'Play again? (y/n)'
-      play = gets.chomp
-      case play
-      when 'y'
-      when 'n'
-        put 'Game over!'
-        break
-      else
-        put 'Wrong input'
-      end
-    end
-    play_again
+  print 'Play again? (y/n)'
+  play = gets.chomp
+  case play
+  when 'y'
+  when 'n'
+    puts 'Game over!'
+    break
+  else
+    puts 'Wrong input'
+  end
+
   #здесь вся игра лупе получается
 end
