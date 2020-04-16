@@ -57,6 +57,8 @@ class Game
   end
 
   def calculate_status
+    user_poins = @user.hand.count_points
+    dealer_poins = @dealer.hand.count_points
 
   end
 
