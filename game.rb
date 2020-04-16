@@ -7,7 +7,7 @@ require_relative './hand'
 
 class Game
   def initialize(user, dealer)
-    @deck = build_deck
+    @deck = Deck.new
     @user = user
     @user.hand = Hand.new
     @dealer = dealer
@@ -15,10 +15,6 @@ class Game
 
     2.times {@user.hand.deal!(@deck)}
     2.times {@dealer.hand.deal!(@deck)}
-  end
-
-  def build_deck
-    Deck.new
   end
 
   def user_hand
@@ -38,13 +34,16 @@ class Game
 
   def start_game
     #Если 21 очко у игрока или дилера
-    #Показать карты на руках пользователя
-    user_hand
+    if @user.hand.count_points == 21 || @dealer.hand.count_points == 21
+      #Показать карты на руках пользователя
+      user_hand
 
 
-    #Иначе Если не 21 у обоих, то играть дальше,
-    #где выбор ходов пользователя или дилера
-    play_game
+      #Иначе Если не 21 у обоих, то играть дальше,
+      #где выбор ходов пользователя или дилера
+    else
+      play_game
+    end
 
 
     #Показать карты на руках дилера
