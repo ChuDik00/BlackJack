@@ -51,7 +51,12 @@ class Game
     print 'Dealer scores: '
     puts @dealer.hand.count_points
   end
+
+  def start
+
+  end
 end
+
 
 # game = Game.new
 # p user
