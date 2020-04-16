@@ -40,18 +40,15 @@ class Game
       #Иначе Если не 21 у обоих, то играть дальше,
       #где выбор ходов пользователя или дилера
     else
-      user_hand
       play_game
     end
-
 
     # Показать карты на руках дилера
     dealer_hand
     # Задать статус выигрыш, проигрыш или ничья (для передачи в main.rb)
     status = calculate_status
-    p status
     # пересчитать баланс с учётом +10$ или -10$
-    new_balance(status)
+      new_balance(status)
     #возврат статуса
     status
   end
@@ -59,6 +56,8 @@ class Game
   def calculate_status
     user_points = @user.hand.count_points
     dealer_points = @dealer.hand.count_points
+    p user_points
+    p dealer_points
     status = if user_points.eql?(dealer_points)
                0
              elsif user_points.eql?(21)
@@ -69,9 +68,11 @@ class Game
                1
              elsif user_points < dealer_points && dealer_points <= 21
                -1
-               elsif user_points < dealer_points && dealer_points > 21
+             elsif user_points < dealer_points && dealer_points > 21
+               1
              end
     status
+    p status
   end
 
   def new_balance(status)
@@ -89,6 +90,7 @@ class Game
   def play_game
     loop do
       # вылететь, если число карт = 3 (луп)
+      user_hand
       break if @user.hand.cards_number.eql?(3)
 
       # для пользователя пропустить ход, взять карту, открыться (break loop)
