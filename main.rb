@@ -33,14 +33,14 @@ loop do
   puts 'Dealer victory!' if status.negative?
   puts '*' * 20
   puts "Balance of #{user.name} = #{user.balance}"
-  puts "Balance of Dealer = #{dealer.balance}\n"
-  print 'Play again? (y/n) '
+  puts "Balance of Dealer = #{dealer.balance}"
+  print "\nPlay again? (y/n) "
   play = gets.chomp
   case play
   when 'y'
-    puts 'Shuffle cards and start new game!'
+    puts "\nShuffle cards and start new game!"
   when 'n'
-    puts 'Game over!'
+    puts "\nGame over!"
     break
   else
     puts 'Wrong input. Press y or n'

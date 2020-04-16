@@ -19,7 +19,7 @@ class Game
   end
 
   def user_hand
-    puts 'Your cards: '
+    puts "\nYour cards: "
     @user.hand.show_cards
     print 'Your scores: '
     puts @user.hand.count_points
@@ -90,7 +90,7 @@ class Game
 
   def first_step
     user_hand
-    puts '1 - Skip'
+    puts "\n1 - Skip"
     puts '2 - Add one card'
     choice = gets.chomp.to_i
     first_step_choice(choice)
@@ -106,7 +106,8 @@ class Game
     else
       puts 'Wrong choice.'
     end
-    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
+    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17 &&
+      @dealer.hand.cards_number < 3
   end
 
   # rubocop:disable all
