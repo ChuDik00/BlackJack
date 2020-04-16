@@ -46,24 +46,30 @@ class Game
     end
 
 
-    #Показать карты на руках дилера
+    # Показать карты на руках дилера
     dealer_hand
-    #Задать статус выигрыш, проигрыш или ничья (для передачи в main.rb)
-    status = ?
-    #пересчитать баланс с учётом +10$ или -10$
+    # Задать статус выигрыш, проигрыш или ничья (для передачи в main.rb)
+    status = calculate_status
+    # пересчитать баланс с учётом +10$ или -10$
     new_balance(status)
     #возврат статуса
     status
   end
 
+  def calculate_status
+
+  end
 
   def new_balance(status)
-    #если пользователдь выиграл
-    @user.increase_balance
-    @dealer.decrease_balance
-    #если пользователь проиграл
-    @user.decrease_balance
-    @dealer.increase_balance
+    # если пользователдь выиграл (status.positive?)
+    if status.positive?
+      @user.increase_balance
+      @dealer.decrease_balance
+      # если пользователь проиграл (status.negative?)
+    elsif status.negative?
+      @user.decrease_balance
+      @dealer.increase_balance
+    end
   end
 
   def play_game

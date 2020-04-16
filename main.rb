@@ -40,9 +40,9 @@ loop do
   # game.user_hand
   # game.dealer_hand
 
-  return 'Dead heat!' if status == 0
-  return 'Your victory!' if status == 1
-  return 'Dealer victory!' if status == 2
+  return 'Dead heat!' if status.zero?
+  return 'Your victory!' if status.positive?
+  return 'Dealer victory!' if status.negative?
 
 
   #Выводится баланс игрока и баланс дилера
