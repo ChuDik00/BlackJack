@@ -57,9 +57,21 @@ class Game
   end
 
   def calculate_status
-    user_poins = @user.hand.count_points
-    dealer_poins = @dealer.hand.count_points
-
+    user_points = @user.hand.count_points
+    dealer_points = @dealer.hand.count_points
+    status = if user_points.eql?(dealer_points)
+               0
+             elsif user_points.eql?(21)
+               1
+             elsif dealer_points.eql?(21)
+               -1
+             elsif user_points > dealer_points
+               1
+             elsif user_points < dealer_points && dealer_points <= 21
+               -1
+               elsif user_points < dealer_points && dealer_points > 21
+             end
+    status
   end
 
   def new_balance(status)
