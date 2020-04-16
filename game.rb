@@ -107,7 +107,7 @@ class Game
         puts 'Wrong choice.'
       end
       # для дилера, если очков меньше или = 17 добавить картул
-      @dealer.hand.deal(@deck) if @dealer.hand.count_points <= 17
+      @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
       break if choice == 3
     end
   end
