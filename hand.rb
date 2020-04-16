@@ -33,6 +33,8 @@ class Hand
     points
   end
 
+  private
+
   def ace_count_points(points, card_rank)
     ace_rank = if points + card_rank <= 21
                  card_rank

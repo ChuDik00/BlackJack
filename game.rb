@@ -19,6 +19,16 @@ class Game
     2.times { @dealer.hand.deal!(@deck) }
   end
 
+  def status
+    play_game
+    dealer_hand
+    status = calculate_status
+    new_balance(status)
+    status
+  end
+
+  private
+
   def user_hand
     puts "\nYour cards: "
     @user.hand.show_cards
@@ -31,14 +41,6 @@ class Game
     @dealer.hand.show_cards
     print 'Dealer scores: '
     puts @dealer.hand.count_points
-  end
-
-  def status
-    play_game
-    dealer_hand
-    status = calculate_status
-    new_balance(status)
-    status
   end
 
   # rubocop:disable all
