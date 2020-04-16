@@ -56,7 +56,7 @@ class Game
   def calculate_status
     user_points = @user.hand.count_points
     dealer_points = @dealer.hand.count_points
-    status = if user_points.eql?(dealer_points)
+    status = if user_points.eql?(dealer_points) || (user_points > 21 && dealer_points > 21)
                0
              elsif user_points.eql?(21)
                1
