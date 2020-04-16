@@ -11,15 +11,8 @@ rescue RuntimeError => e
   retry
 end
 
-def create_dealer
-  Dealer.new
-rescue RuntimeError => e
-  puts e.message
-  retry
-end
-
 user = create_user
-dealer = create_dealer
+dealer = Dealer.new
 puts "Hello, #{user.name}!"
 puts 'Lets begin new game BlackJack!'
 loop do

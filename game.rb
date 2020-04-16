@@ -33,11 +33,7 @@ class Game
   end
 
   def status
-    # if @user.hand.count_points.eql?(21) || @dealer.hand.count_points.eql?(21)
-    #   user_hand
-    # else
-      play_game
-    # end
+    play_game
     dealer_hand
     status = calculate_status
     new_balance(status)
@@ -91,7 +87,7 @@ class Game
   def first_step
     user_hand
     puts "\n1 - Skip"
-    puts '2 - Add one card'
+    puts '2 - Take one card'
     choice = gets.chomp.to_i
     first_step_choice(choice)
     @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
@@ -107,7 +103,7 @@ class Game
       puts 'Wrong choice.'
     end
     @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17 &&
-      @dealer.hand.cards_number < 3
+                                 @dealer.hand.cards_number < 3
   end
 
   # rubocop:disable all
@@ -119,7 +115,7 @@ class Game
         break
       end
 
-      puts '1 - Add one card'
+      puts '1 - Take one card'
       puts '2 - Show cards'
       choice = gets.chomp.to_i
       last_step_choice(choice)
