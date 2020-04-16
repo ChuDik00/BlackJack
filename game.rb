@@ -7,31 +7,15 @@ require_relative './hand'
 
 
 class Game
-  def initialize
+  def initialize(user, dealer)
     @deck = build_deck
-    @user = create_user
+    @user = user
     @user.hand = Hand.new
-    @dealer = create_dealer
+    @dealer = dealer
     @dealer.hand = Hand.new
 
     2.times {@user.hand.deal!(@deck)}
     2.times {@dealer.hand.deal!(@deck)}
-  end
-
-  def create_user
-    print 'Insert your name: '
-    name = gets.chomp
-    User.new(name)
-  rescue RuntimeError => e
-    puts e.message
-    retry
-  end
-
-  def create_dealer
-    Dealer.new
-  rescue RuntimeError => e
-    puts e.message
-    retry
   end
 
   def build_deck
