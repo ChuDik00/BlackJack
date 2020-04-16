@@ -1,4 +1,3 @@
-# require_relative './card'
 require_relative './deck'
 require_relative './player'
 require_relative './user'
@@ -32,24 +31,14 @@ class Game
   end
 
   def status
-    #Если 21 очко у игрока или дилера
     if @user.hand.count_points.eql?(21) || @dealer.hand.count_points.eql?(21)
-      #Показать карты на руках пользователя
       user_hand
-
-      #Иначе Если не 21 у обоих, то играть дальше,
-      #где выбор ходов пользователя или дилера
     else
       play_game
     end
-
-    # Показать карты на руках дилера
     dealer_hand
-    # Задать статус выигрыш, проигрыш или ничья (для передачи в main.rb)
     status = calculate_status
-    # пересчитать баланс с учётом +10$ или -10$
-      new_balance(status)
-    #возврат статуса
+    new_balance(status)
     status
   end
 
@@ -73,11 +62,9 @@ class Game
   end
 
   def new_balance(status)
-    # если пользователдь выиграл (status.positive?)
     if status.positive?
       @user.increase_balance
       @dealer.decrease_balance
-      # если пользователь проиграл (status.negative?)
     elsif status.negative?
       @user.decrease_balance
       @dealer.increase_balance
@@ -86,11 +73,9 @@ class Game
 
   def play_game
     loop do
-      # вылететь, если число карт = 3 (луп)
       user_hand
       break if @user.hand.cards_number.eql?(3)
 
-      # для пользователя пропустить ход, взять карту, открыться (break loop)
       puts '1 - Skip'
       puts '2 - Add one card'
       puts '3 - Show cards'
@@ -105,18 +90,8 @@ class Game
       else
         puts 'Wrong choice.'
       end
-      # для дилера, если очков меньше или = 17 добавить картул
       @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
       break if choice == 3
     end
   end
 end
-
-
-# game = Game.new
-# p user
-# p dealer
-# p deck
-# p user.hand.cards.size
-# p dealer.hand.cards.size
-# p deck.cards.size
