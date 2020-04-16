@@ -13,8 +13,9 @@ class Card
 
   def rank
     return face if (2..10).include?(@face)
-    return 10 if ['J', 'Q', 'K'].include?(@face)
+    return 10 if %w[J Q K].include?(@face)
     return 11 if @face == 'A'
+
     @rank
   end
 end

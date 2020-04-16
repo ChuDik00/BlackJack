@@ -1,10 +1,10 @@
-require_relative './card'
+# require_relative './card'
 require_relative './deck'
 require_relative './player'
 require_relative './user'
 require_relative './dealer'
 require_relative './hand'
-require_relative './validation'
+
 
 class Game
   def initialize
@@ -53,9 +53,7 @@ class Game
   end
 end
 
-game = Game.new
-game.user_hand
-game.dealer_hand
+# game = Game.new
 # p user
 # p dealer
 # p deck
