@@ -58,7 +58,11 @@ class Game
 
   def new_balance(status)
     #если пользователдь выиграл
+    @user.increase_balance
+    @dealer.decrease_balance
     #если пользователь проиграл
+    @user.decrease_balance
+    @dealer.increase_balance
   end
 
   def play_game
