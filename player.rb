@@ -3,7 +3,7 @@ class Player
   attr_reader :balance
 
   def initialize
-    @balance = 0
+    @balance = 100
   end
 
   def increase_balance

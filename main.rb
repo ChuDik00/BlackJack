@@ -28,25 +28,27 @@ loop do
   #Если нет денег, игра заканчивается
   abort 'Your balance is ZERO!' if user.balance.zero?
   abort 'Your balance is ZERO!' if dealer.balance.zero?
-  # Показываются результаты
 
   #Если есть деньги (иначе?)
   #Создаётся новая игра (с этим же игроком, значит игрок вводится здесь раньше)
   # передаётся в инициализацию в Game
   game = Game.new(user, dealer)
 
-  game.user_hand
-  game.dealer_hand
+  # ЗАПУСКАЕТСЯ ИГРА, возвращаются результаты игры
+  # (Как считать результаты? Если игры, значит в Game)
+
+  # game.user_hand
+  # game.dealer_hand
 
   #Выводятся результаты игры
-  # (Как считать результаты? Если игры, значит в Game)
-  #
+
+
   #Выводится баланс игрока и баланс дилера
   puts "Balance of #{user.name} = #{user.balance}"
   puts "Balance of Dealer = #{dealer.balance}"
 
   #Выводится новый запрос на игру типа играем ещё да/нет?
-  print 'Play again? (y/n)'
+  print 'Play again? (y/n) '
   play = gets.chomp
   case play
   when 'y'
