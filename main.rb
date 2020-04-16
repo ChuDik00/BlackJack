@@ -40,6 +40,9 @@ loop do
   # (Как считать результаты? Если игры, значит в Game)
   #
   #Выводится баланс игрока и баланс дилера
+  puts "Balance of #{user.name} = #{user.balance}"
+  puts "Balance of Dealer = #{dealer.balance}"
+
   #Выводится новый запрос на игру типа играем ещё да/нет?
   print 'Play again? (y/n)'
   play = gets.chomp
