@@ -27,15 +27,10 @@ loop do
   puts '*' * 20
   puts "Balance of #{user.name} = #{user.balance}"
   puts "Balance of Dealer = #{dealer.balance}"
-  print "\nPlay again? (y/n) "
-  play = gets.chomp
-  case play
-  when 'y'
-    puts "\nShuffle cards and start new game!"
-  when 'n'
-    puts "\nGame over!"
-    break
-  else
-    puts 'Wrong input. Press y or n'
+  until user_out.eql?('y') || user_out.eql?('n')
+    print "\nPlay again? (y/n) "
+    user_out = gets.chomp.downcase
   end
+
+  abort 'Game over!' if user_out.eql?('n')
 end
