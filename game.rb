@@ -56,6 +56,11 @@ class Game
     status
   end
 
+  def new_balance(status)
+    #если пользователдь выиграл
+    #если пользователь проиграл
+  end
+
   def play_game
     loop do
     #вылететь, если число карт = 3 (луп)
