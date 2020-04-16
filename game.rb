@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './deck'
 require_relative './player'
 require_relative './user'
@@ -12,8 +14,8 @@ class Game
     @dealer = dealer
     @dealer.hand = Hand.new
 
-    2.times {@user.hand.deal!(@deck)}
-    2.times {@dealer.hand.deal!(@deck)}
+    2.times { @user.hand.deal!(@deck) }
+    2.times { @dealer.hand.deal!(@deck) }
   end
 
   def user_hand
@@ -31,21 +33,23 @@ class Game
   end
 
   def status
-    if @user.hand.count_points.eql?(21) || @dealer.hand.count_points.eql?(21)
-      user_hand
-    else
+    # if @user.hand.count_points.eql?(21) || @dealer.hand.count_points.eql?(21)
+    #   user_hand
+    # else
       play_game
-    end
+    # end
     dealer_hand
     status = calculate_status
     new_balance(status)
     status
   end
 
+  # rubocop:disable all
   def calculate_status
     user_points = @user.hand.count_points
     dealer_points = @dealer.hand.count_points
-    status = if user_points.eql?(dealer_points) || (user_points > 21 && dealer_points > 21)
+    status = if user_points.eql?(dealer_points) ||
+                (user_points > 21 && dealer_points > 21)
                0
              elsif user_points.eql?(21)
                1
@@ -60,6 +64,7 @@ class Game
              end
     status
   end
+  # rubocop:enable all
 
   def new_balance(status)
     if status.positive?
@@ -77,8 +82,9 @@ class Game
       puts 'Skipped one deal'
     when 2
       @user.hand.deal!(@deck)
-    elseputs '*' * 20
+    else
       puts 'Wrong choice.'
+      first_step
     end
   end
 
@@ -96,18 +102,21 @@ class Game
     when 1
       @user.hand.deal!(@deck)
     when 2
-      puts 'Show cards'
+      user_hand
     else
       puts 'Wrong choice.'
     end
     @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
   end
 
+  # rubocop:disable all
   def play_game
     first_step
     loop do
       user_hand
-      break if @user.hand.cards_number.eql?(3) || @dealer.hand.cards_number.eql?(3)
+      if @user.hand.cards_number.eql?(3)
+        break
+      end
 
       puts '1 - Add one card'
       puts '2 - Show cards'
@@ -116,4 +125,5 @@ class Game
       break if choice.eql?(2)
     end
   end
+  # rubocop:enable all
 end

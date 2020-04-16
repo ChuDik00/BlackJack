@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './game'
 
 def create_user
@@ -18,6 +20,8 @@ end
 
 user = create_user
 dealer = create_dealer
+puts "Hello, #{user.name}!"
+puts 'Lets begin new game BlackJack!'
 loop do
   abort 'Your balance is ZERO!' if user.balance.zero?
   abort 'Dealer balance is ZERO!' if dealer.balance.zero?
@@ -34,10 +38,11 @@ loop do
   play = gets.chomp
   case play
   when 'y'
+    puts 'Shuffle cards and start new game!'
   when 'n'
     puts 'Game over!'
     break
   else
-    puts 'Wrong input'
+    puts 'Wrong input. Press y or n'
   end
 end
