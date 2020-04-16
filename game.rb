@@ -62,7 +62,7 @@ class Game
                0
              elsif user_points.eql?(21)
                1
-             elsif dealer_points.eql?(21)
+             elsif user_points > 21
                -1
              elsif user_points > dealer_points
                1
