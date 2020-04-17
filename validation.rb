@@ -35,7 +35,7 @@ module Validation
     protected
 
     def validate_presence(name, val, _args)
-      raise "#{name} could not be empty." if val.nil? || val == ''
+      raise "#{name.capitalize} could not be empty." if val.nil? || val == ''
     end
   end
 end
