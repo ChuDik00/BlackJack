@@ -11,7 +11,7 @@ class Deck
 
   def create_deck
     @cards = []
-    %w[+ ^ < <>].each do |suit|
+    %w[♠ ♥ ♦ ♣].each do |suit|
       (2..10).each do |face|
         @cards << Card.new(suit, face)
       end
