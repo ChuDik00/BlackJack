@@ -34,7 +34,7 @@ module Validation
 
     protected
 
-    def presence(name, val, _args)
+    def validate_presence(name, val, _args)
       raise "#{name} could not be empty." if val.nil? || val == ''
     end
   end

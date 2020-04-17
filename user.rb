@@ -6,7 +6,7 @@ class User < Player
   include Validation
   attr_accessor :name
 
-  validate :name, :presence
+  validate :name, :validate_presence
   def initialize(name)
     @name = name
     validate!
