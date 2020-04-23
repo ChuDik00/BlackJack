@@ -5,43 +5,84 @@ require_relative './player'
 require_relative './user'
 require_relative './dealer'
 require_relative './hand'
+require_relative './interface'
 
 class Game
-  def initialize(user, dealer)
-    @deck = Deck.new
-    puts "\nShuffle cards and start new game!"
-    @user = user
-    @user.hand = Hand.new
-    @dealer = dealer
-    @dealer.hand = Hand.new
+  def initialize
+    @interface = Interface.new
+    @user = @interface.user
+    @dealer = @interface.dealer
+    @deck = @interface.deck
+  end
 
+  def start
+    Interface.hello
+    loop do
+      abort 'Your balance is ZERO!' if @user.balance.zero?
+      abort 'Dealer balance is ZERO!' if @dealer.balance.zero?
+      status
+      new_deal
+      game_over
+      abort "\nGame over!" if @game_over.eql?('n')
+    end
+  end
+
+  private
+  def game_over
+    @game_over = nil
+    until @game_over.eql?('y') || @game_over.eql?('n')
+      print "\nPlay again? (y/n) "
+      @game_over = gets.chomp.downcase
+    end
+    @game_over
+  end
+
+  def new_deal
+    @deck = Deck.new
+    @user.hand = Hand.new
+    @dealer.hand = Hand.new
     2.times { @user.hand.deal!(@deck) }
     2.times { @dealer.hand.deal!(@deck) }
   end
 
   def status
+    @status = game_status
+    puts '*' * 20
+    Interface.dead_heat if @status.zero?
+    Interface.your_victory if @status.positive?
+    Interface.dealer_victory if @status.negative?
+    puts '*' * 20
+    puts "Balance of #{@user.name} = #{@user.balance}"
+    puts "Balance of Dealer = #{@dealer.balance}"
+  end
+
+  # rubocop:disable all
+  def play_game
+    @interface.first_step
+    loop do
+      @interface.user_hand
+      if @user.hand.cards_number.eql?(3)
+        break
+      end
+
+      puts '1 - Take one card'
+      puts '2 - Show cards'
+      choice = gets.chomp.to_i
+      @interface.last_step_choice(choice)
+      break if choice.eql?(2)
+    end
+  end
+  # rubocop:enable all
+
+  def game_status
     play_game
-    dealer_hand
+    @interface.dealer_hand
     status = calculate_status
     new_balance(status)
     status
   end
 
   private
-
-  def user_hand
-    puts "\nYour cards: "
-    @user.hand.show_cards
-    print 'Your scores: '
-    puts @user.hand.count_points
-  end
-
-  def dealer_hand
-    puts 'Dealer cards: '
-    @dealer.hand.show_cards
-    print 'Dealer scores: '
-    puts @dealer.hand.count_points
-  end
 
   # rubocop:disable all
   def calculate_status
@@ -74,56 +115,4 @@ class Game
       @dealer.increase_balance
     end
   end
-
-  def first_step_choice(choice)
-    case choice
-    when 1
-      puts 'Skipped one deal'
-    when 2
-      @user.hand.deal!(@deck)
-    else
-      puts 'Wrong choice.'
-      first_step
-    end
-  end
-
-  def first_step
-    user_hand
-    puts "\n1 - Skip"
-    puts '2 - Take one card'
-    choice = gets.chomp.to_i
-    first_step_choice(choice)
-    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
-  end
-
-  def last_step_choice(choice)
-    case choice
-    when 1
-      @user.hand.deal!(@deck)
-    when 2
-      user_hand
-    else
-      puts 'Wrong choice.'
-    end
-    @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17 &&
-                                 @dealer.hand.cards_number < 3
-  end
-
-  # rubocop:disable all
-  def play_game
-    first_step
-    loop do
-      user_hand
-      if @user.hand.cards_number.eql?(3)
-        break
-      end
-
-      puts '1 - Take one card'
-      puts '2 - Show cards'
-      choice = gets.chomp.to_i
-      last_step_choice(choice)
-      break if choice.eql?(2)
-    end
-  end
-  # rubocop:enable all
 end

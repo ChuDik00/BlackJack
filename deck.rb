@@ -3,6 +3,8 @@
 require_relative './card'
 
 class Deck
+  SUITS = %w[♠ ♥ ♦ ♣].freeze
+  FACES = %w[J Q K A].freeze
   attr_reader :cards
 
   def initialize
@@ -11,11 +13,13 @@ class Deck
 
   def create_deck
     @cards = []
-    %w[♠ ♥ ♦ ♣].each do |suit|
+
+    SUITS.each do |suit|
       (2..10).each do |face|
         @cards << Card.new(suit, face)
       end
-      %w[J Q K A].each do |face|
+
+      FACES.each do |face|
         @cards << Card.new(suit, face)
       end
     end

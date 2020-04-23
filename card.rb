@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Card
   attr_reader :suit, :face
 
@@ -18,4 +20,7 @@ class Card
 
     @rank
   end
+
+
+
 end
