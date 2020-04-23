@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Interface
-  attr_accessor :user, :deck
-  attr_reader :dealer
+  attr_reader :dealer, :user, :deck
 
   def initialize
     @deck = Deck.new
