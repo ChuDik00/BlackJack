@@ -16,7 +16,7 @@ class Game
   end
 
   def start
-    Interface.hello
+    @interface.hello
     loop do
       abort 'Your balance is ZERO!' if @user.balance.zero?
       abort 'Dealer balance is ZERO!' if @dealer.balance.zero?
@@ -49,9 +49,9 @@ class Game
   def status
     @status = game_status
     puts '*' * 20
-    Interface.dead_heat if @status.zero?
-    Interface.your_victory if @status.positive?
-    Interface.dealer_victory if @status.negative?
+    @interface.dead_heat if @status.zero?
+    @interface.your_victory if @status.positive?
+    @interface.dealer_victory if @status.negative?
     puts '*' * 20
     puts "Balance of #{@user.name} = #{@user.balance}"
     puts "Balance of Dealer = #{@dealer.balance}"

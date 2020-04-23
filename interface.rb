@@ -23,20 +23,20 @@ class Interface
     retry
   end
 
-  def self.hello
+  def hello
     puts "Hello, #{@user.name}!"
     puts 'Lets begin BlackJack!'
   end
 
-  def self.dead_heat
+  def dead_heat
     puts 'Dead heat!'
   end
 
-  def self.your_victory
+  def your_victory
     puts 'Your victory!'
   end
 
-  def self.dealer_victory
+  def dealer_victory
     puts 'Dealer victory!'
   end
 
