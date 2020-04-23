@@ -28,6 +28,7 @@ class Game
   end
 
   private
+
   def game_over
     @game_over = nil
     until @game_over.eql?('y') || @game_over.eql?('n')
@@ -81,8 +82,6 @@ class Game
     new_balance(status)
     status
   end
-
-  private
 
   # rubocop:disable all
   def calculate_status

@@ -20,7 +20,4 @@ class Card
 
     @rank
   end
-
-
-
 end
