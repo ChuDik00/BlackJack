@@ -27,6 +27,15 @@ class Interface
     puts 'Lets begin BlackJack!'
   end
 
+  def game_over
+    game_over = nil
+    until game_over.eql?('y') || game_over.eql?('n')
+      print "\nPlay again? (y/n) "
+      game_over = gets.chomp.downcase
+    end
+    game_over
+  end
+
   def dead_heat
     puts 'Dead heat!'
   end
@@ -44,6 +53,18 @@ class Interface
     @user.hand.show_cards
     print 'Your scores: '
     puts @user.hand.count_points
+  end
+
+  def user_balance
+    puts "Balance of #{@user.name} = #{@user.balance}"
+  end
+
+  def dealer_balance
+    puts "Balance of Dealer = #{@dealer.balance}"
+  end
+
+  def draw_stars
+    puts '*' * 20
   end
 
   def dealer_hand
@@ -74,7 +95,11 @@ class Interface
     @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17
   end
 
-  def last_step_choice(choice)
+  # rubocop:disable all
+  def last_step_choice
+    puts '1 - Take one card'
+    puts '2 - Show cards'
+    choice = gets.chomp.to_i
     case choice
     when 1
       @user.hand.deal!(@deck)
@@ -85,5 +110,7 @@ class Interface
     end
     @dealer.hand.deal!(@deck) if @dealer.hand.count_points <= 17 &&
                                  @dealer.hand.cards_number < 3
+    choice
   end
+  # rubocop:enable all
 end

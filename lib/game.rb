@@ -22,21 +22,12 @@ class Game
       abort 'Dealer balance is ZERO!' if @dealer.balance.zero?
       status
       new_deal
-      game_over
-      abort "\nGame over!" if @game_over.eql?('n')
+      game_over = @interface.game_over
+      abort "\nGame over!" if game_over.eql?('n')
     end
   end
 
   private
-
-  def game_over
-    @game_over = nil
-    until @game_over.eql?('y') || @game_over.eql?('n')
-      print "\nPlay again? (y/n) "
-      @game_over = gets.chomp.downcase
-    end
-    @game_over
-  end
 
   def new_deal
     @deck = Deck.new
@@ -47,40 +38,25 @@ class Game
   end
 
   def status
-    @status = game_status
-    puts '*' * 20
-    @interface.dead_heat if @status.zero?
-    @interface.your_victory if @status.positive?
-    @interface.dealer_victory if @status.negative?
-    puts '*' * 20
-    puts "Balance of #{@user.name} = #{@user.balance}"
-    puts "Balance of Dealer = #{@dealer.balance}"
+    status = game_status
+    @interface.draw_stars
+    @interface.dead_heat if status.zero?
+    @interface.your_victory if status.positive?
+    @interface.dealer_victory if status.negative?
+    @interface.draw_stars
+    @interface.user_balance
+    @interface.dealer_balance
   end
 
-  # rubocop:disable all
   def play_game
     @interface.first_step
     loop do
       @interface.user_hand
-      if @user.hand.cards_number.eql?(3)
-        break
-      end
+      break if @user.hand.cards_number.eql?(3)
 
-      puts '1 - Take one card'
-      puts '2 - Show cards'
-      choice = gets.chomp.to_i
-      @interface.last_step_choice(choice)
+      choice = @interface.last_step_choice
       break if choice.eql?(2)
     end
-  end
-  # rubocop:enable all
-
-  def game_status
-    play_game
-    @interface.dealer_hand
-    status = calculate_status
-    new_balance(status)
-    status
   end
 
   # rubocop:disable all
@@ -104,6 +80,14 @@ class Game
     status
   end
   # rubocop:enable all
+
+  def game_status
+    play_game
+    @interface.dealer_hand
+    status = calculate_status
+    new_balance(status)
+    status
+  end
 
   def new_balance(status)
     if status.positive?

@@ -1,7 +1,17 @@
 # frozen_string_literal: true
 
 class Card
+  SUITS = %w[♠ ♥ ♦ ♣].freeze
+  FACES = %w[J Q K A].freeze
   attr_reader :suit, :face
+
+  def self.suits
+    SUITS
+  end
+
+  def self.faces
+    FACES
+  end
 
   def initialize(suit, face)
     @suit = suit
